@@ -18,7 +18,7 @@ def mandelbrot_point(c, max_iter=100):
     return max_iter
 
 
-# @profile  # <-- Milestone 2: line profiler decorator (works only with kernprof)
+@profile  # <-- Milestone 2: line profiler decorator (works only with kernprof)
 def mandelbrot_naive(xmin, xmax, ymin, ymax, width, height, max_iter=100):
     """
     Naive Mandelbrot: Python loops over all pixels; calls mandelbrot_point per pixel.

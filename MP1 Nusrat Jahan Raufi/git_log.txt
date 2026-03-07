@@ -1,0 +1,75 @@
+2026-03-03 5d80cd4 Milestone 5: jit vs njit experiment
+
+ week3/jit_vs_njit.py | 91 ++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 91 insertions(+)
+2026-02-27 76ad73d Add gitignore for __pycache__
+
+ .gitignore                           |   1 +
+ week3/benchmark_parallel.py          |  30 +++++++++++
+ week3/mandelbrot_dtype.py            |  99 +++++++++++++++++++++++++++++++++++
+ week3/mandelbrot_parallel.py         |  28 ++++++++++
+ week3/precision_images.py            |  38 ++++++++++++++
+ week3/scaling_parallel.py            |  26 +++++++++
+ week3/week3_precision_comparison.png | Bin 0 -> 296760 bytes
+ 7 files changed, 222 insertions(+)
+2026-02-27 8ac687f Organize repo by week: separate week2 and week3
+
+ __pycache__/mandelbrot_grid.cpython-311.pyc        | Bin 0 -> 2957 bytes
+ __pycache__/mandelbrot_vectorized.cpython-311.pyc  | Bin 0 -> 2334 bytes
+ __pycache__/mandelbrot_week3.cpython-312.pyc       | Bin 0 -> 2691 bytes
+ __pycache__/mandelbrot_week3_numba.cpython-312.pyc | Bin 0 -> 4537 bytes
+ lineprofile_m2.py.lprof                            | Bin 0 -> 265 bytes
+ .../mandelbrot_vectorized.py                       |   0
+ week2/mandelbrot_week2_backup.py                   |  24 +++++++++++++++++++++
+ milestone1.py => week2/milestone1.py               |   0
+ milestone2.py => week2/milestone2.py               |   0
+ .../milestone3_memory_access.py                    |   0
+ .../milestone4_scaling.py                          |   0
+ mandelbrot_week3.py => week3/mandelbrot_week3.py   |   0
+ week3/naive_profile.prof                           | Bin 0 -> 2415 bytes
+ week3/numpy_profile.prof                           | Bin 0 -> 4900 bytes
+ profile_week3_m1.py => week3/profile_week3_m1.py   |   0
+ 15 files changed, 24 insertions(+)
+2026-02-27 f6a001f Milestone 3: Numba @njit + benchmarking
+
+ benchmark_m3.py           | 38 +++++++++++++++++++
+ mandelbrot_week3_numba.py | 94 +++++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 132 insertions(+)
+2026-02-27 28b0eb5 Milestone 2: Line-level profiling of naive version
+
+ lineprofile_m2.py   |  5 +++++
+ mandelbrot_week3.py | 11 ++++++++++-
+ 2 files changed, 15 insertions(+), 1 deletion(-)
+2026-02-26 23923cb Milestone 1: cProfile naive vs NumPy
+
+ mandelbrot_week3.py | 47 +++++++++++++++++++++++++++++++++++++++++++++++
+ profile_week3_m1.py | 21 +++++++++++++++++++++
+ 2 files changed, 68 insertions(+)
+2026-02-23 ea060e8 Add Milestone 4: scaling analysis
+
+ milestone4_scaling.py | 80 +++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 80 insertions(+)
+2026-02-23 c041831 Add Milestone 2: timing comparison
+
+ milestone2.py | 47 +++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 47 insertions(+)
+2026-02-23 12503fa Add Milestone 3: memory access pattern analysis
+
+ milestone3_memory_access.py | 89 +++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 89 insertions(+)
+2026-02-19 8ce33a7 Merge branch 'main' of https://github.com/nusratjahanraufi2-glitch/mandelbrot-nsc
+2026-02-19 0d8ae6a Add naive and vectorized Mandelbrot implementations
+
+ mandelbrot_grid.py       | 59 ++++++++++++++++++++++++++++++++++++++++++++++++
+ mandelbrot_point.py      | 22 ++++++++++++++++++
+ mandelbrot_vectorized.py | 51 +++++++++++++++++++++++++++++++++++++++++
+ milestone1.py            | 15 ++++++++++++
+ 4 files changed, 147 insertions(+)
+2026-02-05 8de3b75 Add mandelbrot skeleton
+
+ mandelbrot.py | 24 ++++++++++++++++++++++++
+ 1 file changed, 24 insertions(+)
+2026-02-05 cea6f56 Add Python environment specification
+
+ environment.yml | 186 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 186 insertions(+)
