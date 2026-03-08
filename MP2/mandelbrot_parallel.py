@@ -4,14 +4,10 @@ from numba import njit
 
 @njit
 def mandelbrot_pixel(c_real, c_imag, max_iter):
-    """
-    Return the escape iteration count for one complex point c = c_real + i*c_imag.
-    """
     z_real = 0.0
     z_imag = 0.0
 
     for i in range(max_iter):
-        # Check escape before computing the next iteration
         if z_real * z_real + z_imag * z_imag > 4.0:
             return i
 
@@ -26,18 +22,13 @@ def mandelbrot_pixel(c_real, c_imag, max_iter):
 
 @njit
 def mandelbrot_chunk(row_start, row_end, N, x_min, x_max, y_min, y_max, max_iter):
-    """
-    Compute Mandelbrot iteration counts for rows [row_start, row_end).
-    Returns an array of shape (row_end - row_start, N) with dtype int32.
-    """
     out = np.empty((row_end - row_start, N), dtype=np.int32)
 
     dx = (x_max - x_min) / N
     dy = (y_max - y_min) / N
 
     for r in range(row_end - row_start):
-        global_row = row_start + r
-        c_imag = y_min + global_row * dy
+        c_imag = y_min + (r + row_start) * dy
 
         for col in range(N):
             c_real = x_min + col * dx
@@ -47,13 +38,10 @@ def mandelbrot_chunk(row_start, row_end, N, x_min, x_max, y_min, y_max, max_iter
 
 
 def mandelbrot_serial(N, x_min, x_max, y_min, y_max, max_iter=100):
-    """
-    Compute the full Mandelbrot image as one chunk.
-    """
     return mandelbrot_chunk(0, N, N, x_min, x_max, y_min, y_max, max_iter)
 
 
-if __name__ == "__main__":
+def main():
     N = 1024
     X_MIN, X_MAX = -2.5, 1.0
     Y_MIN, Y_MAX = -1.25, 1.25
@@ -61,8 +49,10 @@ if __name__ == "__main__":
 
     image = mandelbrot_serial(N, X_MIN, X_MAX, Y_MIN, Y_MAX, MAX_ITER)
 
-    print("Finished Mandelbrot serial computation.")
     print("Shape:", image.shape)
     print("dtype:", image.dtype)
     print("min:", image.min())
     print("max:", image.max())
+
+
+main()
