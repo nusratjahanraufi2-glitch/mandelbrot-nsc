@@ -61,10 +61,12 @@ def mandelbrot_parallel(
         row = row_end
 
     if pool is not None:
-        parts = pool.map(_worker, chunks)
-        return np.vstack(parts)
+        return np.vstack(pool.map(_worker, chunks))
+
+    tiny = [(0, 8, 8, x_min, x_max, y_min, y_max, max_iter)]
 
     with Pool(processes=n_workers) as p:
+        p.map(_worker, tiny)
         parts = p.map(_worker, chunks)
 
     return np.vstack(parts)
@@ -77,16 +79,23 @@ if __name__ == "__main__":
     Y_MIN, Y_MAX = -1.25, 1.25
 
     n_workers = max(1, os.cpu_count() // 2)
+    n_chunks = 4 * n_workers
 
-    serial = mandelbrot_serial(N, X_MIN, X_MAX, Y_MIN, Y_MAX, max_iter)
+    serial_result = mandelbrot_serial(N, X_MIN, X_MAX, Y_MIN, Y_MAX, max_iter)
 
-    parallel = mandelbrot_parallel(
-        N, X_MIN, X_MAX, Y_MIN, Y_MAX,
+    parallel_result = mandelbrot_parallel(
+        N,
+        X_MIN,
+        X_MAX,
+        Y_MIN,
+        Y_MAX,
         max_iter=max_iter,
         n_workers=n_workers,
-        n_chunks=4 * n_workers
+        n_chunks=n_chunks
     )
 
-    print("Serial shape:", serial.shape)
-    print("Parallel shape:", parallel.shape)
-    print("Same result:", np.array_equal(serial, parallel))
+    print("Serial shape:", serial_result.shape)
+    print("Parallel shape:", parallel_result.shape)
+    print("Same result:", np.array_equal(serial_result, parallel_result))
+    print("n_workers:", n_workers)
+    print("n_chunks:", n_chunks)
